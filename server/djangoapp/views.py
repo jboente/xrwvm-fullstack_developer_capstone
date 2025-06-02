@@ -69,6 +69,7 @@ def registration(request):
         username_exist = True
     except Exception as e:
         # If not, simply log this is a new user
+        logger.debug(f"Error: {e}")
         logger.debug("{} is new user".format(username))
 
     # If it is a new user
@@ -90,7 +91,7 @@ def registration(request):
         return JsonResponse(data)
 
 
-# Update the `get_dealerships` render list of dealerships all by default, 
+# Update the `get_dealerships` render list of dealerships all by default,
 # particular state if state is passed
 def get_dealerships(request, state="All"):
     if state == "All":
@@ -139,7 +140,7 @@ def add_review(request):
         except Exception as e:
             print(">>> Error posting review:", e)
             return JsonResponse({
-                "status": 401, 
+                "status": 401,
                 "message": "Error in posting review"
             })
     else:
